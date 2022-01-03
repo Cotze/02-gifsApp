@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class GifsService {
 
-  private apiKey: string = 'SDYvd344GO6wrMxfjjpTqQ0MIefHI5bU';
+  private api_key: string = 'SDYvd344GO6wrMxfjjpTqQ0MIefHI5bU';
 
   private _historial: string[] = [];
 
@@ -13,7 +14,9 @@ export class GifsService {
     return [...this._historial];
   }
 
-  buscarGifs( query: string){
+  constructor( private http: HttpClient ){}
+
+  buscarGifs( query: string = ''){
 
     query = query.trim().toLowerCase();
     
@@ -22,7 +25,9 @@ export class GifsService {
       this._historial = this._historial.splice(0,10);
     }
 
-    console.log( this._historial );
-    
+    this.http.get( 'https://api.giphy.com/v1/gifs/search?api_key=SDYvd344GO6wrMxfjjpTqQ0MIefHI5bU&q=one piece&limit=10' )
+        .subscribe( ( resp: any ) => {
+          console.log( resp.data );
+        });    
   }
 }
