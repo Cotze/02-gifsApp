@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class GifsService {
 
+  private apiKey: string = 'SDYvd344GO6wrMxfjjpTqQ0MIefHI5bU';
+
   private _historial: string[] = [];
 
   get historial(){
